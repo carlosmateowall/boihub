@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -11,7 +11,7 @@ import { PERFIL_LABELS } from '@/lib/constants'
 
 export function OnboardingForm() {
   const router = useRouter()
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [profile, setProfile] = useState<Profile | null>(null)
   const [loading, setLoading] = useState(true)
   const [saving, setSaving] = useState(false)
@@ -21,7 +21,29 @@ export function OnboardingForm() {
     async function load() {
       const { data: { user } } = await supabase.auth.getUser()
       if (!user) { router.push('/login'); return }
-      const { data } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+
+      let { data } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+
+      if (!data) {
+        const meta = user.user_metadata as { nome?: string; perfil?: PerfilTipo }
+        const { data: created } = await supabase
+          .from('profiles')
+          .insert({
+            id: user.id,
+            nome: meta.nome ?? 'Usuário',
+            perfil: (meta.perfil ?? 'produtor') as PerfilTipo,
+            estado: 'BR',
+            cabecas: 0,
+            hectares: 0,
+            fretes_count: 0,
+            avaliacao: 0,
+            onboarding_completo: false,
+          })
+          .select('*')
+          .single()
+        data = created
+      }
+
       setProfile(data)
       setLoading(false)
     }
@@ -66,7 +88,16 @@ export function OnboardingForm() {
     )
   }
 
-  const perfil = profile?.perfil as PerfilTipo
+  if (!profile) {
+    return (
+      <div className="w-full max-w-md text-center flex flex-col gap-4">
+        <p className="body-md text-mute">Erro ao carregar perfil. Tente novamente.</p>
+        <Button variant="primary" onClick={() => window.location.reload()}>Recarregar</Button>
+      </div>
+    )
+  }
+
+  const perfil = profile.perfil as PerfilTipo
 
   return (
     <div className="w-full max-w-md">

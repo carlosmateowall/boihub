@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
-import { Loader2, ArrowLeft } from 'lucide-react'
+import { Loader2, ArrowLeft, MailCheck } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { PerfilSelector } from './PerfilSelector'
@@ -19,7 +19,7 @@ const step1Schema = z.object({
 
 export function CadastroForm() {
   const router = useRouter()
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [step, setStep] = useState(1)
   const [nome, setNome] = useState('')
   const [email, setEmail] = useState('')
@@ -27,6 +27,7 @@ export function CadastroForm() {
   const [perfil, setPerfil] = useState<PerfilTipo | ''>('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [emailSent, setEmailSent] = useState(false)
 
   function handleStep1(e: React.FormEvent) {
     e.preventDefault()
@@ -44,14 +45,40 @@ export function CadastroForm() {
     if (!perfil) { setError('Selecione um perfil.'); return }
     setError('')
     setLoading(true)
-    const { error: authError } = await supabase.auth.signUp({
+    const { data, error: authError } = await supabase.auth.signUp({
       email,
       password: senha,
       options: { data: { nome, perfil } },
     })
     setLoading(false)
     if (authError) { setError(authError.message); return }
+    if (!data.session) {
+      setEmailSent(true)
+      return
+    }
     router.push('/onboarding')
+  }
+
+  if (emailSent) {
+    return (
+      <div className="w-full max-w-md">
+        <div className="bg-canvas rounded-xl p-8 flex flex-col gap-6 items-center text-center">
+          <MailCheck className="h-12 w-12 text-primary" strokeWidth={1.5} />
+          <div className="flex flex-col gap-2">
+            <h1 className="display-sm text-ink">Confirme seu email</h1>
+            <p className="body-md text-mute">
+              Enviamos um link de confirmação para <strong>{email}</strong>. Clique no link para ativar sua conta.
+            </p>
+          </div>
+          <p className="text-sm text-mute">
+            Já confirmou?{' '}
+            <Link href="/login" className="font-semibold text-ink hover:text-primary">
+              Entrar
+            </Link>
+          </p>
+        </div>
+      </div>
+    )
   }
 
   return (

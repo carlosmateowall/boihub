@@ -65,11 +65,11 @@ export default async function PerfilPage() {
             <>
               <div className="flex justify-between">
                 <span className="text-mute text-sm">Cabeças de gado</span>
-                <span className="font-semibold text-ink text-sm">{profile.cabecas.toLocaleString('pt-BR')}</span>
+                <span className="font-semibold text-ink text-sm">{(profile.cabecas ?? 0).toLocaleString('pt-BR')}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-mute text-sm">Área</span>
-                <span className="font-semibold text-ink text-sm">{profile.hectares.toLocaleString('pt-BR')} ha</span>
+                <span className="font-semibold text-ink text-sm">{(profile.hectares ?? 0).toLocaleString('pt-BR')} ha</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-mute text-sm">Fretes realizados</span>

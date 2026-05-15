@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
@@ -16,7 +16,7 @@ const schema = z.object({
 
 export function LoginForm() {
   const router = useRouter()
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [showSenha, setShowSenha] = useState(false)
@@ -38,8 +38,8 @@ export function LoginForm() {
       setError('Email ou senha incorretos.')
       return
     }
-    router.push('/dashboard')
     router.refresh()
+    router.push('/dashboard')
   }
 
   return (

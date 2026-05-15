@@ -34,10 +34,10 @@ export function DashboardProdutor({ profile, fretes, consultas }: Props) {
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Cabeças', value: profile.cabecas.toLocaleString('pt-BR'), icon: '🐄' },
-          { label: 'Hectares', value: profile.hectares.toLocaleString('pt-BR'), icon: '🌾' },
+          { label: 'Cabeças', value: (profile.cabecas ?? 0).toLocaleString('pt-BR'), icon: '🐄' },
+          { label: 'Hectares', value: (profile.hectares ?? 0).toLocaleString('pt-BR'), icon: '🌾' },
           { label: 'Fretes ativos', value: fretesAtivos.length, icon: '🚛' },
-          { label: 'Avaliação', value: `${profile.avaliacao.toFixed(1)} ★`, icon: '⭐' },
+          { label: 'Avaliação', value: `${(profile.avaliacao ?? 0).toFixed(1)} ★`, icon: '⭐' },
         ].map(stat => (
           <Card key={stat.label} variant="default">
             <CardContent>

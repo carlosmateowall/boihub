@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
 import { z } from 'zod'
 import { Loader2 } from 'lucide-react'
@@ -27,7 +27,7 @@ const tiposGado = [
 
 export function FreteForm() {
   const router = useRouter()
-  const supabase = createClient()
+  const supabase = useMemo(() => createClient(), [])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [fields, setFields] = useState({

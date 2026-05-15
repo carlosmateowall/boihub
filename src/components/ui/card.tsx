@@ -7,6 +7,7 @@ const cardVariants = cva('rounded-xl', {
     variant: {
       default: 'bg-canvas',
       sage: 'bg-canvas-soft',
+      green: 'bg-primary-pale text-ink',
       dark: 'bg-ink text-primary',
     },
     padding: {

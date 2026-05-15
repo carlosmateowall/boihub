@@ -15,6 +15,7 @@ const buttonVariants = cva(
         tertiary: 'bg-canvas text-ink rounded-xl border border-ink hover:bg-ink hover:text-canvas',
         ghost: 'text-ink rounded-xl hover:bg-canvas-soft',
         danger: 'bg-negative text-white rounded-xl hover:bg-negative-deep',
+        'icon-circular': 'bg-canvas text-ink rounded-full hover:bg-canvas-soft',
       },
       size: {
         sm: 'px-4 py-2 text-sm',

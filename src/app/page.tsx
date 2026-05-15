@@ -79,7 +79,7 @@ export default function LandingPage() {
       </header>
 
       {/* Hero */}
-      <section className="bg-canvas-soft px-6 lg:px-16 py-20 lg:py-32">
+      <section className="bg-canvas-soft px-6 lg:px-16 py-12">
         <div className="max-w-5xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="flex flex-col gap-8">
@@ -145,7 +145,7 @@ export default function LandingPage() {
       </section>
 
       {/* Features */}
-      <section className="px-6 lg:px-16 py-20 bg-canvas">
+      <section className="px-6 lg:px-16 py-12 bg-canvas">
         <div className="max-w-5xl mx-auto flex flex-col gap-12">
           <div className="text-center">
             <h2 className="display-md text-ink">Tudo que sua fazenda precisa</h2>

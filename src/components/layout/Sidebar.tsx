@@ -30,7 +30,7 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="hidden lg:flex flex-col w-64 bg-canvas min-h-screen p-6 gap-8">
+    <aside className="hidden lg:flex flex-col w-64 bg-canvas min-h-screen py-3 px-6 gap-8">
       <Link href="/dashboard" className="flex items-center gap-2">
         <span className="font-display font-extrabold text-2xl text-ink">Boi</span>
         <span className="font-display font-extrabold text-2xl text-primary">Hub</span>

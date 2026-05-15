@@ -44,7 +44,7 @@ export function SaudeClient({ produtos }: Props) {
             key={cat}
             onClick={() => setCategoria(cat)}
             className={cn(
-              'px-4 py-2 rounded-pill text-sm font-semibold whitespace-nowrap transition-colors',
+              'px-6 py-3 rounded-pill text-sm font-semibold whitespace-nowrap transition-colors',
               categoria === cat
                 ? 'bg-ink text-canvas'
                 : 'bg-canvas text-body hover:bg-canvas-soft'

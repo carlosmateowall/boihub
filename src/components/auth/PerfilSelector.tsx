@@ -30,7 +30,7 @@ export function PerfilSelector({ value, onChange }: PerfilSelectorProps) {
               type="button"
               onClick={() => onChange(p.id)}
               className={cn(
-                'flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all',
+                'flex items-center gap-4 p-6 rounded-xl border-2 text-left transition-all',
                 selected
                   ? 'border-primary bg-primary-pale'
                   : 'border-canvas-soft bg-canvas-soft hover:border-ink/20'

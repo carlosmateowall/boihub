@@ -10,7 +10,7 @@ interface RatingProps {
 export function Rating({ value, count, className }: RatingProps) {
   return (
     <span className={cn('inline-flex items-center gap-1', className)}>
-      <Star className="h-4 w-4 fill-primary text-primary" />
+      <Star className="h-4 w-4 fill-positive text-positive" />
       <span className="text-sm font-semibold text-ink">{value.toFixed(1)}</span>
       {count !== undefined && (
         <span className="text-sm text-mute">({count})</span>

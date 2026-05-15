@@ -13,10 +13,10 @@ interface Props {
   consultas: ConsultaVet[]
 }
 
-const freteStatusVariant: Record<string, 'positive' | 'warning' | 'negative' | 'mute'> = {
+const freteStatusVariant: Record<string, 'positive' | 'warning' | 'negative' | 'primary' | 'mute'> = {
   pendente: 'warning',
   confirmado: 'positive',
-  em_andamento: 'primary' as 'positive',
+  em_andamento: 'primary',
   concluido: 'mute',
   cancelado: 'negative',
 }
@@ -28,7 +28,7 @@ export function DashboardProdutor({ profile, fretes, consultas }: Props) {
     <div className="flex flex-col gap-6 max-w-5xl">
       <div>
         <h1 className="display-sm text-ink">Olá, {profile.nome.split(' ')[0]}</h1>
-        <p className="body-md text-mute mt-1">{profile.fazenda ?? 'Sua fazenda'} · {profile.cidade}</p>
+        <p className="body-md text-mute mt-1">{profile.fazenda ?? 'Sua fazenda'}{profile.cidade ? ` · ${profile.cidade}` : ''}</p>
       </div>
 
       {/* Stats */}

@@ -13,16 +13,19 @@ export function useProfile() {
 
   useEffect(() => {
     if (!user) { setLoading(false); return }
-    supabase
-      .from('profiles')
-      .select('*')
-      .eq('id', user.id)
-      .single()
-      .then(({ data }) => {
+    async function fetchProfile() {
+      try {
+        const { data } = await supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user!.id)
+          .single()
         setProfile(data)
+      } finally {
         setLoading(false)
-      })
-      .catch(() => setLoading(false))
+      }
+    }
+    fetchProfile()
   }, [user, supabase])
 
   return { profile, loading: userLoading || loading }

@@ -1,0 +1,38 @@
+import { createClient } from '@/lib/supabase/server'
+import { VeterinarioCard } from '@/components/saude/VeterinarioCard'
+import { EmptyState } from '@/components/shared/EmptyState'
+import { Stethoscope } from 'lucide-react'
+import type { Veterinario } from '@/types/database'
+
+export const metadata = { title: 'Veterinários — BoiHub' }
+
+export default async function VeterinariosPage() {
+  const supabase = await createClient()
+  const { data } = await supabase
+    .from('veterinarios')
+    .select('*')
+    .order('avaliacao', { ascending: false })
+
+  const vets = (data ?? []) as Veterinario[]
+
+  return (
+    <div className="flex flex-col gap-6 max-w-4xl">
+      <div>
+        <h1 className="display-sm text-ink">Veterinários</h1>
+        <p className="body-md text-mute mt-1">Consultas online e presenciais</p>
+      </div>
+
+      {vets.length === 0 ? (
+        <EmptyState
+          icon={Stethoscope}
+          title="Nenhum veterinário disponível"
+          description="Em breve veterinários da sua região estarão disponíveis."
+        />
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2">
+          {vets.map(v => <VeterinarioCard key={v.id} vet={v} />)}
+        </div>
+      )}
+    </div>
+  )
+}

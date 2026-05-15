@@ -1,0 +1,144 @@
+@import "tailwindcss";
+
+@theme {
+  /* Brand */
+  --color-primary: #9fe870;
+  --color-primary-hover: #cdffad;
+  --color-primary-neutral: #c5edab;
+  --color-primary-pale: #e2f6d5;
+
+  /* Surfaces */
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #e8ebe6;
+
+  /* Text */
+  --color-ink: #0e0f0c;
+  --color-ink-deep: #163300;
+  --color-body: #454745;
+  --color-mute: #868685;
+
+  /* Semantic */
+  --color-positive: #2ead4b;
+  --color-positive-deep: #054d28;
+  --color-warning: #ffd11a;
+  --color-warning-deep: #b86700;
+  --color-warning-content: #4a3b1c;
+  --color-negative: #d03238;
+  --color-negative-deep: #a72027;
+
+  /* Illustrative accents */
+  --color-accent-orange: #ffc091;
+  --color-accent-cyan: #38c8ff;
+
+  /* Border radius */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  /* Fonts */
+  --font-display: 'Manrope', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+:root {
+  --primary: #9fe870;
+  --primary-hover: #cdffad;
+  --primary-neutral: #c5edab;
+  --primary-pale: #e2f6d5;
+  --canvas: #ffffff;
+  --canvas-soft: #e8ebe6;
+  --ink: #0e0f0c;
+  --ink-deep: #163300;
+  --body: #454745;
+  --mute: #868685;
+  --positive: #2ead4b;
+  --positive-deep: #054d28;
+  --warning: #ffd11a;
+  --warning-deep: #b86700;
+  --warning-content: #4a3b1c;
+  --negative: #d03238;
+  --negative-deep: #a72027;
+  --accent-orange: #ffc091;
+  --accent-cyan: #38c8ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--canvas-soft);
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+/* Typography utility classes */
+.display-mega {
+  font-family: var(--font-display);
+  font-size: 96px;
+  font-weight: 800;
+  line-height: 0.85;
+}
+
+.display-xl {
+  font-family: var(--font-display);
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 0.9;
+}
+
+.display-md {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 0.9;
+}
+
+.display-sm {
+  font-family: var(--font-body);
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.display-xs {
+  font-family: var(--font-body);
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.body-lg {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.body-md {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.body-sm {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.43;
+}
+
+.caption {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.33;
+}

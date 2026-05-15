@@ -25,7 +25,7 @@ export function DashboardProdutor({ profile, fretes, consultas }: Props) {
   const fretesAtivos = fretes.filter(f => ['pendente', 'confirmado', 'em_andamento'].includes(f.status))
 
   return (
-    <div className="flex flex-col gap-6 max-w-5xl">
+    <div className="flex flex-col gap-6">
       <div>
         <h1 className="display-sm text-ink">Olá, {profile.nome.split(' ')[0]}</h1>
         <p className="body-md text-mute mt-1">{profile.fazenda ?? 'Sua fazenda'}{profile.cidade ? ` · ${profile.cidade}` : ''}</p>

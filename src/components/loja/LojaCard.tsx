@@ -41,7 +41,7 @@ export function LojaCard({ loja }: Props) {
         {loja.categorias && loja.categorias.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {loja.categorias.map(c => (
-              <span key={c} className="text-xs bg-canvas-soft text-mute px-2 py-1 rounded-md">
+              <span key={c} className="text-xs bg-canvas-soft text-ink border border-ink/15 px-2 py-1 rounded-sm w-fit">
                 {c}
               </span>
             ))}

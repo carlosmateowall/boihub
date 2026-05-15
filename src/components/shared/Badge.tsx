@@ -13,7 +13,7 @@ const variantClasses: Record<BadgeVariant, string> = {
   warning: 'bg-warning text-warning-content',
   negative: 'bg-negative-deep text-white',
   primary: 'bg-primary text-ink',
-  mute: 'bg-canvas-soft text-mute',
+  mute: 'bg-canvas-soft text-ink border border-ink/15 rounded-sm',
 }
 
 export function Badge({ variant = 'primary', children, className }: BadgeProps) {

@@ -1,10 +1,11 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect, notFound } from 'next/navigation'
 import Link from 'next/link'
-import { ArrowLeft, MapPin, Calendar, Truck } from 'lucide-react'
+import { ArrowLeft, MapPin, Calendar, Truck, Star } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/shared/Badge'
 import { Button } from '@/components/ui/button'
+import { FreteActions } from '@/components/fretes/FreteActions'
 import { formatDate, formatCurrency } from '@/lib/utils'
 import { FRETE_STATUS_LABELS, GADO_TIPO_LABELS } from '@/lib/constants'
 import type { Frete } from '@/types/database'
@@ -100,6 +101,22 @@ export default async function FreteDetalhePage({ params }: { params: Promise<{ i
           </CardContent>
         </Card>
       )}
+
+      {frete.avaliacao_produtor && (
+        <Card variant="default">
+          <CardContent className="flex items-center justify-between">
+            <p className="font-semibold text-ink flex items-center gap-2">
+              <Star className="h-5 w-5 text-primary fill-primary" strokeWidth={1.5} /> Sua avaliação
+            </p>
+            <p className="display-xs text-ink">
+              {frete.avaliacao_produtor.toFixed(1)}
+              <span className="text-sm text-mute font-normal"> / 5</span>
+            </p>
+          </CardContent>
+        </Card>
+      )}
+
+      <FreteActions frete={frete} />
     </div>
   )
 }

@@ -2,7 +2,8 @@
 
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-import { Loader2, XCircle, Truck, CheckCircle2, Star } from 'lucide-react'
+import Link from 'next/link'
+import { Loader2, XCircle, Truck, CheckCircle2, Star, CreditCard } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { createClient } from '@/lib/supabase/client'
 import type { Frete } from '@/types/database'
@@ -76,18 +77,26 @@ export function FreteActions({ frete }: Props) {
   }
 
   // Status: pendente | confirmado | em_andamento | concluido | cancelado
+  const podePagar = frete.status === 'pendente' && (frete.preco_total ?? 0) > 0
   const podeCancelar = frete.status === 'pendente'
-  const podeEmbarcar = frete.status === 'pendente' || frete.status === 'confirmado'
+  const podeEmbarcar = frete.status === 'confirmado'
   const podeConcluir = frete.status === 'em_andamento'
   const podeAvaliar = frete.status === 'concluido' && !frete.avaliacao_produtor
 
-  if (!podeCancelar && !podeEmbarcar && !podeConcluir && !podeAvaliar) return null
+  if (!podePagar && !podeCancelar && !podeEmbarcar && !podeConcluir && !podeAvaliar) return null
 
   return (
     <div className="bg-canvas rounded-xl p-5 border border-border flex flex-col gap-3">
       <p className="font-semibold text-ink">Ações disponíveis</p>
 
       <div className="flex flex-wrap gap-2">
+        {podePagar && (
+          <Button variant="primary" size="sm" asChild>
+            <Link href={`/fretes/${frete.id}/pagar`}>
+              <CreditCard className="h-4 w-4" /> Pagar via PIX
+            </Link>
+          </Button>
+        )}
         {podeCancelar && (
           <Button
             variant="ghost"

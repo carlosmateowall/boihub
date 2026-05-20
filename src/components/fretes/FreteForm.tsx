@@ -15,6 +15,7 @@ const schema = z.object({
   tipo_gado: z.enum(['corte', 'leite', 'bezerro', 'touro']),
   data_embarque: z.string().min(1, 'Informe a data'),
   peso_medio_kg: z.number().optional(),
+  preco_total: z.number().optional(),
   observacoes: z.string().optional(),
 })
 
@@ -32,7 +33,7 @@ export function FreteForm() {
   const [error, setError] = useState('')
   const [fields, setFields] = useState({
     origem: '', destino: '', cabecas: '', tipo_gado: 'corte',
-    data_embarque: '', peso_medio_kg: '', observacoes: '',
+    data_embarque: '', peso_medio_kg: '', preco_total: '', observacoes: '',
   })
 
   function set(key: string, value: string) {
@@ -49,6 +50,7 @@ export function FreteForm() {
       ...fields,
       cabecas: parseInt(fields.cabecas),
       peso_medio_kg: fields.peso_medio_kg ? parseFloat(fields.peso_medio_kg) : undefined,
+      preco_total: fields.preco_total ? parseFloat(fields.preco_total) : undefined,
     })
     if (!parsed.success) { setError(parsed.error.errors[0].message); return }
 
@@ -64,6 +66,7 @@ export function FreteForm() {
       tipo_gado: parsed.data.tipo_gado,
       data_embarque: parsed.data.data_embarque,
       peso_medio_kg: parsed.data.peso_medio_kg ?? null,
+      preco_total: parsed.data.preco_total ?? null,
       observacoes: parsed.data.observacoes ?? null,
       status: 'pendente',
     })
@@ -95,6 +98,18 @@ export function FreteForm() {
         <Input label="Data de embarque" type="date" value={fields.data_embarque} onChange={e => set('data_embarque', e.target.value)} required />
         <Input label="Peso médio (kg)" type="number" value={fields.peso_medio_kg} onChange={e => set('peso_medio_kg', e.target.value)} placeholder="400" />
       </div>
+
+      <Input
+        label="Valor combinado (R$)"
+        type="number"
+        step="0.01"
+        value={fields.preco_total}
+        onChange={e => set('preco_total', e.target.value)}
+        placeholder="2800,00"
+      />
+      <p className="text-xs text-mute -mt-2">
+        Combine o preço com o motorista (via WhatsApp por exemplo) e informe aqui. Você poderá pagar via PIX depois.
+      </p>
 
       <div className="flex flex-col gap-1.5">
         <label className="text-sm font-semibold text-ink">Observações</label>

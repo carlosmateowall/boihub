@@ -1,187 +1,187 @@
-# Boi Hub — Dark Visual Redesign
+# Boi Hub — Redesign Visual Dark
 
-**Date:** 2026-05-19  
-**Status:** Approved  
-**Approach:** C — Hybrid (token overhaul + AnimatedHero + key component redesigns)
-
----
-
-## Context
-
-The current Boi Hub landing and interior pages use a light theme (off-white canvas, dark ink text, green primary). The goal is to replace this entirely with a dark, high-contrast visual identity based on a hero section discovered on 21st.dev — jet black backgrounds, `#4ade80` green accent, glass/blur effects, and bold typography.
+**Data:** 2026-05-19  
+**Status:** Aprovado  
+**Abordagem:** C — Híbrida (token overhaul + AnimatedHero + redesign dos componentes-chave)
 
 ---
 
-## Design Identity
+## Contexto
 
-| Property | Value |
+O Boi Hub atualmente usa um tema claro (fundo off-white, texto escuro, verde como cor primária). O objetivo é substituir tudo por uma identidade visual escura e de alto contraste, baseada em uma hero section encontrada no 21st.dev — fundo preto absoluto, acento verde `#4ade80`, efeitos glass/blur e tipografia pesada.
+
+---
+
+## Identidade Visual
+
+| Propriedade | Valor |
 |---|---|
-| Background base | `#050505` (jet black) |
-| Background elevated | `#0d0d0d` (cards, sidebar) |
-| Accent | `#4ade80` (green) |
-| Accent hover | `#22c55e` |
-| Accent dim (bg) | `rgba(74,222,128,0.12)` |
-| Text primary | `#ffffff` |
-| Text secondary | `rgba(255,255,255,0.65)` |
-| Text muted | `rgba(255,255,255,0.35)` |
-| Border subtle | `rgba(255,255,255,0.08)` |
-| Border strong | `rgba(255,255,255,0.18)` |
-| Glass surface | `rgba(255,255,255,0.10)` + `backdrop-blur-sm` |
-| Font weight (headings) | 800–900 |
-| Letter spacing (headings) | `-0.03em` to `-0.05em` |
+| Fundo base | `#050505` (preto absoluto) |
+| Fundo elevado | `#0d0d0d` (cards, sidebar) |
+| Acento | `#4ade80` (verde) |
+| Acento hover | `#22c55e` |
+| Acento dim (fundo) | `rgba(74,222,128,0.12)` |
+| Texto primário | `#ffffff` |
+| Texto secundário | `rgba(255,255,255,0.65)` |
+| Texto mudo | `rgba(255,255,255,0.35)` |
+| Borda sutil | `rgba(255,255,255,0.08)` |
+| Borda forte | `rgba(255,255,255,0.18)` |
+| Superfície glass | `rgba(255,255,255,0.10)` + `backdrop-blur-sm` |
+| Peso tipográfico (títulos) | 800–900 |
+| Espaçamento de letras (títulos) | `-0.03em` a `-0.05em` |
 
-No box shadows. Dark themes use borders, not shadows, for depth.
+Sem `box-shadow`. Temas escuros usam bordas — não sombras — para criar profundidade.
 
 ---
 
-## Section 1 — CSS Tokens (`globals.css`)
+## Seção 1 — Tokens CSS (`globals.css`)
 
-The project has tokens in two places that must both be updated:
-- **`@theme {}`** — prefixed with `--color-`, generates Tailwind utility classes (`bg-canvas`, `text-ink`, `border-primary`, etc.)
-- **`:root {}`** — raw CSS variables used via `var(--canvas)` in inline styles and custom CSS
+O projeto tem tokens em dois lugares, e os dois precisam ser atualizados:
+- **`@theme {}`** — prefixados com `--color-`, geram classes Tailwind (`bg-canvas`, `text-ink`, `border-primary`, etc.)
+- **`:root {}`** — variáveis CSS brutas usadas via `var(--canvas)` em estilos inline e CSS customizado
 
-Both blocks must be updated in sync. No token names change — only values.
+Os dois blocos devem ser atualizados em sincronia. Os nomes dos tokens não mudam — só os valores.
 
 ```css
-/* === @theme block (Tailwind classes) === */
---color-canvas:       #050505;
---color-canvas-soft:  #0d0d0d;
---color-ink:          #ffffff;
---color-body:         rgba(255,255,255,0.65);
---color-mute:         rgba(255,255,255,0.35);
---color-primary:      #4ade80;
---color-primary-hover:#22c55e;
---color-primary-pale: rgba(74,222,128,0.12);
---color-positive:     #4ade80;
---color-positive-deep:#22c55e;
---color-negative:     #f87171;
---color-warning:      #facc15;
---color-border:       rgba(255,255,255,0.08);   /* new */
---color-border-strong:rgba(255,255,255,0.18);   /* new */
+/* === bloco @theme (classes Tailwind) === */
+--color-canvas:        #050505;
+--color-canvas-soft:   #0d0d0d;
+--color-ink:           #ffffff;
+--color-body:          rgba(255,255,255,0.65);
+--color-mute:          rgba(255,255,255,0.35);
+--color-primary:       #4ade80;
+--color-primary-hover: #22c55e;
+--color-primary-pale:  rgba(74,222,128,0.12);
+--color-positive:      #4ade80;
+--color-positive-deep: #22c55e;
+--color-negative:      #f87171;
+--color-warning:       #facc15;
+--color-border:        rgba(255,255,255,0.08);   /* novo */
+--color-border-strong: rgba(255,255,255,0.18);   /* novo */
 
-/* === :root block (CSS var() usage) === */
-/* Mirror all of the above without --color- prefix */
---canvas:       #050505;
---canvas-soft:  #0d0d0d;
---ink:          #ffffff;
-/* ... same pattern ... */
---border:       rgba(255,255,255,0.08);
---border-strong:rgba(255,255,255,0.18);
+/* === bloco :root (uso via var()) === */
+/* Espelha tudo acima sem o prefixo --color- */
+--canvas:        #050505;
+--canvas-soft:   #0d0d0d;
+--ink:           #ffffff;
+/* ... mesmo padrão ... */
+--border:        rgba(255,255,255,0.08);
+--border-strong: rgba(255,255,255,0.18);
 ```
 
-Body default: `background-color: var(--canvas-soft); color: var(--ink);` — already wired, values just change.
+Body padrão: `background-color: var(--canvas-soft); color: var(--ink);` — já está configurado, só os valores mudam.
 
 ---
 
-## Section 2 — Components
+## Seção 2 — Componentes
 
-### `animated-hero-section-1.tsx` (new)
-- Path: `src/components/ui/animated-hero-section-1.tsx`
-- Source: 21st.dev prompt provided by user, unchanged in structure
-- Dependency: `framer-motion` (install via npm)
-- Props used in landing: `backgroundImageUrl`, `logo`, `navLinks`, `topRightAction`, `title`, `description`, `ctaButton`, `secondaryCta`
-- Background image: Unsplash cattle photo (`photo-1500595046743-cd271d694d30`)
+### `animated-hero-section-1.tsx` (novo)
+- Caminho: `src/components/ui/animated-hero-section-1.tsx`
+- Fonte: prompt do 21st.dev fornecido pelo usuário, estrutura mantida intacta
+- Dependência: `framer-motion` (instalar via npm)
+- Props usadas na landing: `backgroundImageUrl`, `logo`, `navLinks`, `topRightAction`, `title`, `description`, `ctaButton`, `secondaryCta`
+- Imagem de fundo: foto de gado do Unsplash (`photo-1500595046743-cd271d694d30`)
 - Overlay: `bg-black/60`
 
-### `button.tsx` — add `glass` variant
+### `button.tsx` — adicionar variante `glass`
 ```ts
 glass: 'bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white/20',
 ```
-Existing variants (`primary`, `ghost`, `tertiary`, etc.) keep their names. `primary` gets updated to `bg-primary text-black` for better contrast on dark backgrounds.
+As variantes existentes (`primary`, `ghost`, `tertiary`, etc.) mantêm os nomes. A variante `primary` é atualizada para `bg-primary text-black` para melhor contraste no fundo escuro.
 
-### `Sidebar.tsx` — dark redesign
+### `Sidebar.tsx` — redesign dark
 - Container: `bg-canvas-soft border-r border-border`
-- Active item: `bg-primary-pale text-primary border-l-2 border-primary`
-- Inactive item: `text-mute hover:bg-white/5 hover:text-white`
-- Logo: white "Boi" + green "Hub"
+- Item ativo: `bg-primary-pale text-primary border-l-2 border-primary`
+- Item inativo: `text-mute hover:bg-white/5 hover:text-white`
+- Logo: "Boi" branco + "Hub" verde
 
-### `Navbar.tsx` — glass redesign
-- Default state: `bg-transparent backdrop-blur-sm`
-- Scrolled state (JS scroll listener): `bg-canvas/80 backdrop-blur border-b border-border`
+### `Navbar.tsx` — redesign glass
+- Estado padrão: `bg-transparent backdrop-blur-sm`
+- Estado ao rolar (scroll listener): `bg-canvas/80 backdrop-blur border-b border-border`
 - Links: `text-white/70 hover:text-white`
-- CTA button: `glass` variant
+- Botão CTA: variante `glass`
 
-### Inputs / Forms
-- Background: `bg-canvas-soft`
-- Border: `border border-border`
+### Inputs / Formulários
+- Fundo: `bg-canvas-soft`
+- Borda: `border border-border`
 - Focus: `focus:border-primary focus:ring-2 focus:ring-primary/20`
-- Text: `text-white placeholder:text-mute`
+- Texto: `text-white placeholder:text-mute`
 - Label: `text-mute text-sm`
 
-### Cards (generic + FreteCard, LojaCard, SaudeCard, etc.)
-- Background: `bg-canvas-soft`
-- Border: `border border-border`
-- Radius: unchanged (existing `rounded-xl`)
-- No box shadow
+### Cards (genéricos + FreteCard, LojaCard, SaudeCard, etc.)
+- Fundo: `bg-canvas-soft`
+- Borda: `border border-border`
+- Radius: mantido (já usa `rounded-xl`)
+- Sem box-shadow
 
 ---
 
-## Section 3 — Pages
+## Seção 3 — Páginas
 
-### Landing (`src/app/page.tsx`) — full redesign
-1. **Hero**: Replace current hero section with `<AnimatedHero>`. Nav links: Fretes, Veterinários, Loja, Saúde Animal. Title: "Sua fazenda na palma da mão." Buttons: glass variant.
-2. **Stats bar**: Horizontal strip `bg-canvas-soft border-t border-border`, four stats with green values.
-3. **Features grid**: Uniform dark cards `bg-canvas-soft border-border`, remove the current light/dark alternating pattern.
-4. **Perfis section**: Same dark cards, uniform style.
-5. **CTA final**: `bg-canvas-soft`, green heading, white body, green solid button.
+### Landing (`src/app/page.tsx`) — redesign completo
+1. **Hero**: Substituir a hero atual pelo `<AnimatedHero>`. Nav links: Fretes, Veterinários, Loja, Saúde Animal. Título: "Sua fazenda na palma da mão." Botões: variante glass.
+2. **Barra de stats**: Faixa horizontal `bg-canvas-soft border-t border-border`, quatro números com valores em verde.
+3. **Grid de features**: Cards dark uniformes `bg-canvas-soft border-border`; remover o padrão atual de alternância claro/escuro.
+4. **Seção de perfis**: Mesmos cards dark, estilo uniforme.
+5. **CTA final**: `bg-canvas-soft`, título em verde, corpo em branco, botão verde sólido.
 6. **Footer**: `bg-canvas border-t border-border`.
 
-### Auth pages (`src/app/(auth)/layout.tsx` + login + cadastro)
-- Layout: full-screen `bg-canvas`, centered column
-- Form card: `bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-8`
-- Logo at top of card
-- No background photo (hero stays landing-only)
+### Páginas de auth (`src/app/(auth)/layout.tsx` + login + cadastro)
+- Layout: tela cheia `bg-canvas`, coluna centralizada
+- Card do formulário: `bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-8`
+- Logo no topo do card
+- Sem foto de fundo (hero fica exclusiva da landing)
 
 ### Onboarding (`src/app/onboarding/page.tsx`)
-- Same treatment as auth: glass card centered on black background
-- Step indicators: green dot for active, `border-border` for inactive
+- Mesmo tratamento do auth: card glass centralizado no fundo preto
+- Indicadores de etapa: ponto verde para ativo, `border-border` para inativo
 
-### App layout (`src/app/(app)/layout.tsx`)
-- Body: `bg-canvas` (already picks up from token remap)
-- Sidebar: redesigned (see above)
-- Navbar: redesigned (see above)
+### Layout do app (`src/app/(app)/layout.tsx`)
+- Body: `bg-canvas` (já pega automaticamente com o token remap)
+- Sidebar: redesenhada (ver acima)
+- Navbar: redesenhada (ver acima)
 
-### Inner pages (fretes, loja, saúde, suplementos, perfil)
-- No structural changes
-- Token remap handles ~80% automatically
-- `FreteCard`, `LojaCard`, `VeterinarioCard`, `SuplementoCard`, `ProdutoCard`: add explicit `bg-canvas-soft border border-border` so they don't rely on inherited background
+### Páginas internas (fretes, loja, saúde, suplementos, perfil)
+- Sem mudanças estruturais
+- O token remap resolve ~80% automaticamente
+- `FreteCard`, `LojaCard`, `VeterinarioCard`, `SuplementoCard`, `ProdutoCard`: adicionar explicitamente `bg-canvas-soft border border-border` para não depender do background herdado
 
 ---
 
-## Dependencies
+## Dependências
 
 ```bash
 npm install framer-motion
 ```
 
-`@radix-ui/react-slot` and `class-variance-authority` already installed.
+`@radix-ui/react-slot` e `class-variance-authority` já instalados.
 
 ---
 
-## Out of Scope
+## Fora do escopo
 
-- No changes to routing, auth logic, or Supabase integration
-- No new pages or features
-- No mobile nav redesign (can follow in a separate pass)
-- No animation beyond what `AnimatedHero` provides
+- Nenhuma mudança em rotas, lógica de auth ou integração com Supabase
+- Nenhuma página ou feature nova
+- Redesign da nav mobile (pode ser feito em uma passagem separada)
+- Nenhuma animação além do que o `AnimatedHero` já provê
 
 ---
 
-## File Change Summary
+## Resumo de arquivos alterados
 
-| File | Change type |
+| Arquivo | Tipo de mudança |
 |---|---|
 | `src/app/globals.css` | Token overhaul |
-| `src/components/ui/animated-hero-section-1.tsx` | New file |
-| `src/components/ui/button.tsx` | Add `glass` variant, update `primary` contrast |
-| `src/components/layout/Sidebar.tsx` | Dark redesign |
-| `src/components/layout/Navbar.tsx` | Glass + scroll behavior |
-| `src/app/page.tsx` | Full landing redesign |
-| `src/app/(auth)/layout.tsx` | Dark auth layout |
-| `src/app/(app)/layout.tsx` | Picks up tokens; may need minor adjustments |
-| `src/app/onboarding/page.tsx` | Glass card style |
-| `src/components/fretes/FreteCard.tsx` | Explicit dark card tokens |
-| `src/components/loja/LojaCard.tsx` | Explicit dark card tokens |
-| `src/components/loja/SuplementoCard.tsx` | Explicit dark card tokens |
-| `src/components/saude/VeterinarioCard.tsx` | Explicit dark card tokens |
-| `src/components/saude/ProdutoCard.tsx` | Explicit dark card tokens |
+| `src/components/ui/animated-hero-section-1.tsx` | Arquivo novo |
+| `src/components/ui/button.tsx` | Adicionar variante `glass`, atualizar contraste do `primary` |
+| `src/components/layout/Sidebar.tsx` | Redesign dark |
+| `src/components/layout/Navbar.tsx` | Glass + comportamento de scroll |
+| `src/app/page.tsx` | Redesign completo da landing |
+| `src/app/(auth)/layout.tsx` | Layout auth dark |
+| `src/app/(app)/layout.tsx` | Pega tokens automaticamente; ajustes pontuais se necessário |
+| `src/app/onboarding/page.tsx` | Estilo card glass |
+| `src/components/fretes/FreteCard.tsx` | Tokens dark explícitos |
+| `src/components/loja/LojaCard.tsx` | Tokens dark explícitos |
+| `src/components/loja/SuplementoCard.tsx` | Tokens dark explícitos |
+| `src/components/saude/VeterinarioCard.tsx` | Tokens dark explícitos |
+| `src/components/saude/ProdutoCard.tsx` | Tokens dark explícitos |

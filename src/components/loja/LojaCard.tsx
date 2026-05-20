@@ -8,8 +8,11 @@ import type { Loja } from '@/types/database'
 interface Props { loja: Loja }
 
 export function LojaCard({ loja }: Props) {
+  const whatsappMsg = encodeURIComponent(
+    `Olá! Vi a ${loja.nome} no BoiHub e gostaria de mais informações sobre produtos e preços.`
+  )
   const whatsappUrl = loja.whatsapp
-    ? `https://wa.me/55${loja.whatsapp.replace(/\D/g, '')}?text=Olá, encontrei sua loja no BoiHub`
+    ? `https://wa.me/55${loja.whatsapp.replace(/\D/g, '')}?text=${whatsappMsg}`
     : null
 
   return (
@@ -41,7 +44,7 @@ export function LojaCard({ loja }: Props) {
         {loja.categorias && loja.categorias.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {loja.categorias.map(c => (
-              <span key={c} className="text-xs bg-white/5 text-mute px-2 py-1 rounded-md">
+              <span key={c} className="text-xs bg-white/5 text-mute border border-border px-2 py-1 rounded-sm w-fit">
                 {c}
               </span>
             ))}

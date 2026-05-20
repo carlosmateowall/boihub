@@ -9,8 +9,11 @@ import { formatCurrency } from '@/lib/utils'
 interface Props { vet: Veterinario }
 
 export function VeterinarioCard({ vet }: Props) {
+  const whatsappMsg = encodeURIComponent(
+    `Olá, Dr(a). ${vet.nome.split(' ').slice(1).join(' ')}! Vi seu perfil no BoiHub e gostaria de agendar uma teleconsulta.`
+  )
   const whatsappUrl = vet.whatsapp
-    ? `https://wa.me/55${vet.whatsapp.replace(/\D/g, '')}?text=Olá, encontrei seu perfil no BoiHub`
+    ? `https://wa.me/55${vet.whatsapp.replace(/\D/g, '')}?text=${whatsappMsg}`
     : null
 
   return (

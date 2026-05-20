@@ -20,7 +20,7 @@ export function SearchBar({ value, onChange, placeholder = 'Buscar...', classNam
         onChange={e => onChange(e.target.value)}
         placeholder={placeholder}
         className={cn(
-          'w-full bg-canvas text-ink border border-ink/20 rounded-xl',
+          'w-full bg-canvas text-ink border border-ink rounded-md',
           'pl-11 pr-10 py-3 text-sm placeholder:text-mute',
           'focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent'
         )}

@@ -33,7 +33,7 @@ export function SuplementoCard({ suplemento: s }: Props) {
             )}
           </div>
           {s.peso_kg && (
-            <span className="text-xs bg-white/5 text-mute px-2 py-1 rounded-md">
+            <span className="text-xs bg-white/5 text-mute border border-border px-2 py-1 rounded-sm w-fit">
               {s.peso_kg} kg
             </span>
           )}

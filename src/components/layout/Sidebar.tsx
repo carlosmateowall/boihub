@@ -30,8 +30,8 @@ export function Sidebar() {
   }
 
   return (
-    <aside className="hidden lg:flex flex-col w-64 bg-canvas min-h-screen p-6 gap-8">
-      <Link href="/dashboard" className="flex items-center gap-2">
+    <aside className="hidden lg:flex flex-col w-64 bg-canvas border-r border-border min-h-screen p-6 gap-8">
+      <Link href="/dashboard" className="flex items-center gap-1">
         <span className="font-display font-extrabold text-2xl text-ink">Boi</span>
         <span className="font-display font-extrabold text-2xl text-primary">Hub</span>
       </Link>
@@ -46,11 +46,11 @@ export function Sidebar() {
               className={cn(
                 'flex items-center gap-3 px-4 py-3 rounded-xl font-semibold text-sm transition-colors',
                 active
-                  ? 'bg-primary text-ink'
-                  : 'text-body hover:bg-canvas-soft'
+                  ? 'bg-primary-pale text-primary border-l-2 border-primary pl-3'
+                  : 'text-mute hover:bg-white/5 hover:text-ink'
               )}
             >
-              <item.icon className="h-5 w-5" strokeWidth={1.5} />
+              <item.icon className="h-5 w-5 shrink-0" strokeWidth={1.5} />
               {item.label}
             </Link>
           )
@@ -59,7 +59,7 @@ export function Sidebar() {
 
       <button
         onClick={handleLogout}
-        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-body hover:bg-canvas-soft transition-colors"
+        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-mute hover:bg-white/5 hover:text-ink transition-colors"
       >
         <LogOut className="h-5 w-5" strokeWidth={1.5} />
         Sair

@@ -1,7 +1,8 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { Pencil, FileText, Shield, ChevronRight } from 'lucide-react'
+import Image from 'next/image'
+import { Pencil, FileText, Shield, ChevronRight, User as UserIcon } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/shared/Badge'
@@ -36,12 +37,28 @@ export default async function PerfilPage() {
 
       <Card variant="dark">
         <CardContent className="flex flex-col gap-4">
-          <div className="flex items-start justify-between">
-            <div>
-              <p className="display-xs">{profile.nome}</p>
-              <p className="text-sm opacity-70 mt-1">{user.email}</p>
+          <div className="flex items-start gap-4">
+            <div className="relative h-16 w-16 rounded-full overflow-hidden bg-white/10 flex items-center justify-center shrink-0">
+              {profile.foto_url ? (
+                <Image
+                  src={profile.foto_url}
+                  alt={profile.nome}
+                  width={64}
+                  height={64}
+                  className="h-16 w-16 object-cover"
+                  unoptimized
+                />
+              ) : (
+                <UserIcon className="h-7 w-7 opacity-60" strokeWidth={1.5} />
+              )}
             </div>
-            <Badge variant="primary">{PERFIL_LABELS[profile.perfil]}</Badge>
+            <div className="flex-1 flex items-start justify-between">
+              <div>
+                <p className="display-xs">{profile.nome}</p>
+                <p className="text-sm opacity-70 mt-1">{user.email}</p>
+              </div>
+              <Badge variant="primary">{PERFIL_LABELS[profile.perfil]}</Badge>
+            </div>
           </div>
           <Rating value={profile.avaliacao} className="text-primary" />
         </CardContent>

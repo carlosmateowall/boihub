@@ -1,7 +1,9 @@
+import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { VeterinarioCard } from '@/components/saude/VeterinarioCard'
 import { EmptyState } from '@/components/shared/EmptyState'
-import { Stethoscope } from 'lucide-react'
+import { Stethoscope, History } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { whatsappLink } from '@/lib/constants'
 import type { Veterinario } from '@/types/database'
 
@@ -18,9 +20,16 @@ export default async function VeterinariosPage() {
 
   return (
     <div className="flex flex-col gap-6 max-w-4xl">
-      <div>
-        <h1 className="display-sm text-ink">Veterinários</h1>
-        <p className="body-md text-mute mt-1">Consultas online e presenciais</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="display-sm text-ink">Veterinários</h1>
+          <p className="body-md text-mute mt-1">Consultas online e presenciais</p>
+        </div>
+        <Button variant="secondary" asChild>
+          <Link href="/saude/consultas">
+            <History className="h-4 w-4" /> Minhas consultas
+          </Link>
+        </Button>
       </div>
 
       {vets.length === 0 ? (

@@ -1,4 +1,5 @@
-import { MessageCircle } from 'lucide-react'
+import Link from 'next/link'
+import { Calendar } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/shared/Badge'
 import { Rating } from '@/components/shared/Rating'
@@ -9,13 +10,6 @@ import { formatCurrency } from '@/lib/utils'
 interface Props { vet: Veterinario }
 
 export function VeterinarioCard({ vet }: Props) {
-  const whatsappMsg = encodeURIComponent(
-    `Olá, Dr(a). ${vet.nome.split(' ').slice(1).join(' ')}! Vi seu perfil no BoiHub e gostaria de agendar uma teleconsulta.`
-  )
-  const whatsappUrl = vet.whatsapp
-    ? `https://wa.me/55${vet.whatsapp.replace(/\D/g, '')}?text=${whatsappMsg}`
-    : null
-
   return (
     <Card variant="default" className="flex flex-col gap-0">
       <CardContent className="flex flex-col gap-4">
@@ -51,15 +45,11 @@ export function VeterinarioCard({ vet }: Props) {
           ) : (
             <span className="text-sm text-mute">Consulte o preço</span>
           )}
-          {whatsappUrl ? (
-            <Button variant="primary" size="sm" asChild>
-              <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-                <MessageCircle className="h-4 w-4" /> Contatar
-              </a>
-            </Button>
-          ) : (
-            <Button variant="secondary" size="sm">Agendar</Button>
-          )}
+          <Button variant="primary" size="sm" asChild>
+            <Link href={`/saude/veterinarios/${vet.id}/agendar`}>
+              <Calendar className="h-4 w-4" /> Agendar
+            </Link>
+          </Button>
         </div>
       </CardContent>
     </Card>

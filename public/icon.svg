@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="96" fill="#0d2818"/>
+  <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-weight="700"
+        font-size="220"
+        fill="#4ade80"
+        letter-spacing="-8">B</text>
+  <text x="50%" y="54%" text-anchor="middle" dominant-baseline="middle"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-weight="700"
+        font-size="220"
+        fill="#c8992a"
+        letter-spacing="-8"
+        transform="translate(80, 0)">H</text>
+</svg>

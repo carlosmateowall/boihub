@@ -1,0 +1,27 @@
+{
+  "name": "BoiHub — O super app do pecuarista",
+  "short_name": "BoiHub",
+  "description": "Conectamos produtores rurais a veterinários, motoristas de frete e revendas de insumos agropecuários.",
+  "start_url": "/dashboard",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0d2818",
+  "theme_color": "#0d2818",
+  "lang": "pt-BR",
+  "categories": ["business", "productivity", "agriculture"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ]
+}

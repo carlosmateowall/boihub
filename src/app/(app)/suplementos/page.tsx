@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { SuplementoCard } from '@/components/loja/SuplementoCard'
 import { EmptyState } from '@/components/shared/EmptyState'
 import { Package } from 'lucide-react'
+import { whatsappLink } from '@/lib/constants'
 import type { Suplemento } from '@/types/database'
 
 export const metadata = { title: 'Suplementos — BoiHub' }
@@ -26,8 +27,11 @@ export default async function SuplementosPage() {
       {suplementos.length === 0 ? (
         <EmptyState
           icon={Package}
-          title="Nenhum suplemento cadastrado"
-          description="O catálogo de suplementos estará disponível em breve."
+          title="Catálogo em montagem"
+          description="Fabricantes e revendas estão sendo onboardados. Se você fornece suplementos minerais, proteinados ou premix, fale com a gente."
+          actionLabel="Cadastrar produtos"
+          actionHref={whatsappLink('Olá! Sou fabricante/revenda e quero cadastrar suplementos no BoiHub.')}
+          actionExternal
         />
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

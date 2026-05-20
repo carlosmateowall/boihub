@@ -2,13 +2,14 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Stethoscope } from 'lucide-react'
+import { Stethoscope, Syringe } from 'lucide-react'
 import { SearchBar } from '@/components/shared/SearchBar'
 import { ProdutoCard } from './ProdutoCard'
+import { EmptyState } from '@/components/shared/EmptyState'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import type { ProdutoSaude } from '@/types/database'
-import { PRODUTO_TIPO_LABELS } from '@/lib/constants'
+import { PRODUTO_TIPO_LABELS, whatsappLink } from '@/lib/constants'
 
 const CATEGORIAS = ['todos', 'vacina', 'anti', 'antibio', 'vit'] as const
 
@@ -55,12 +56,25 @@ export function SaudeClient({ produtos }: Props) {
         ))}
       </div>
 
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {filtered.map(p => <ProdutoCard key={p.id} produto={p} />)}
-      </div>
+      {produtos.length > 0 && (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map(p => <ProdutoCard key={p.id} produto={p} />)}
+        </div>
+      )}
 
-      {filtered.length === 0 && (
+      {produtos.length > 0 && filtered.length === 0 && (
         <p className="text-center text-mute py-12">Nenhum produto encontrado.</p>
+      )}
+
+      {produtos.length === 0 && (
+        <EmptyState
+          icon={Syringe}
+          title="Catálogo de produtos em montagem"
+          description="Vacinas, antiparasitários, antibióticos e vitaminas aparecerão aqui assim que lojas parceiras cadastrarem seus produtos."
+          actionLabel="Sou loja, quero cadastrar"
+          actionHref={whatsappLink('Olá! Tenho uma loja agropecuária e quero cadastrar produtos no BoiHub.')}
+          actionExternal
+        />
       )}
     </div>
   )

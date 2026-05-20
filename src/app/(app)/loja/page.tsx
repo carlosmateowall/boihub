@@ -2,6 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { LojaCard } from '@/components/loja/LojaCard'
 import { EmptyState } from '@/components/shared/EmptyState'
 import { ShoppingBag } from 'lucide-react'
+import { whatsappLink } from '@/lib/constants'
 import type { Loja } from '@/types/database'
 
 export const metadata = { title: 'Loja — BoiHub' }
@@ -26,8 +27,11 @@ export default async function LojaPage() {
       {lojas.length === 0 ? (
         <EmptyState
           icon={ShoppingBag}
-          title="Nenhuma loja cadastrada"
-          description="Lojas parceiras serão exibidas aqui em breve."
+          title="Sua loja merece estar aqui"
+          description="Revendas e fabricantes do Centro-Oeste: estamos abrindo cadastros. Apareça para produtores que precisam de insumos agropecuários todo mês."
+          actionLabel="Cadastrar minha loja"
+          actionHref={whatsappLink('Olá! Tenho uma loja agropecuária e quero cadastrar no BoiHub.')}
+          actionExternal
         />
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

@@ -1,0 +1,20 @@
+feat(fase2): soft launch - remove mocks e empty states "seja o primeiro"
+
+- Migration supabase/migrations/20260520000002_clear_mocks.sql:
+  DELETE em veterinarios, motoristas, lojas, suplementos, produtos_saude.
+  Esvazia catalogo para soft launch sem dados ficticios.
+
+- EmptyState agora aceita:
+  * actionHref / actionExternal para CTA com link interno ou externo
+  * secondaryLabel/secondaryHref para CTA secundario
+
+- src/lib/constants.ts:
+  * CONTATO com EMAIL, EMAIL_PRIVACIDADE e WHATSAPP
+  * Helper whatsappLink(mensagem) gera link wa.me com mensagem pre-preenchida
+  * TODO marcado para trocar WHATSAPP por numero definitivo
+
+- Empty states reescritos com tom "seja o primeiro":
+  * /saude/veterinarios - convite a vets para cadastro via WhatsApp
+  * /loja - convite a revendas e fabricantes
+  * /suplementos - convite a fornecedores de suplementos
+  * SaudeClient (/saude) - convite a lojas para cadastrar produtos

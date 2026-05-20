@@ -44,6 +44,20 @@ export const SUPLEMENTO_CATEGORIA_LABELS: Record<string, string> = {
   premix: 'Premix',
 }
 
+// Contato do time BoiHub.
+// TODO Carlos: trocar o WHATSAPP por um número real (Carlos ou Gustavo).
+// Formato esperado: somente dígitos com código do país, ex.: 5561XXXXXXXX
+export const CONTATO = {
+  EMAIL: 'contato@boihub.com.br',
+  EMAIL_PRIVACIDADE: 'privacidade@boihub.com.br',
+  WHATSAPP: '5561992365437',
+} as const
+
+export function whatsappLink(mensagem: string): string {
+  const texto = encodeURIComponent(mensagem)
+  return `https://wa.me/${CONTATO.WHATSAPP}?text=${texto}`
+}
+
 export const NAV_ITEMS = [
   { href: '/dashboard', label: 'Dashboard', icon: 'LayoutDashboard' },
   { href: '/fretes', label: 'Fretes', icon: 'Truck' },

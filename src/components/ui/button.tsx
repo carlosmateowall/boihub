@@ -10,16 +10,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        primary: 'bg-primary text-ink rounded-xl hover:bg-primary-hover',
-        secondary: 'bg-canvas-soft text-ink rounded-xl hover:opacity-80',
-        tertiary: 'bg-canvas text-ink rounded-xl border border-ink hover:bg-ink hover:text-canvas',
-        ghost: 'text-ink rounded-xl hover:bg-canvas-soft',
-        danger: 'bg-negative text-white rounded-xl hover:bg-negative-deep',
+        primary:   'bg-primary text-black rounded-xl hover:bg-primary-hover',
+        secondary: 'bg-canvas text-ink rounded-xl border border-border hover:bg-white/10',
+        tertiary:  'bg-transparent text-ink rounded-xl border border-border-strong hover:bg-white/10',
+        ghost:     'text-ink rounded-xl hover:bg-white/5',
+        glass:     'bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-xl hover:bg-white/20',
+        danger:    'bg-negative text-white rounded-xl hover:bg-negative-deep',
       },
       size: {
-        sm: 'px-4 py-2 text-sm',
-        md: 'px-6 py-3 text-base',
-        lg: 'px-8 py-4 text-lg',
+        sm:   'px-4 py-2 text-sm',
+        md:   'px-6 py-3 text-base',
+        lg:   'px-8 py-4 text-lg',
         icon: 'h-10 w-10',
       },
     },

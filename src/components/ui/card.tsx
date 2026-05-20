@@ -5,9 +5,9 @@ import { cva, type VariantProps } from 'class-variance-authority'
 const cardVariants = cva('rounded-xl', {
   variants: {
     variant: {
-      default: 'bg-canvas',
-      sage: 'bg-canvas-soft',
-      dark: 'bg-ink text-primary',
+      default: 'bg-canvas border border-border',
+      sage:    'bg-canvas-soft border border-border',
+      dark:    'bg-white/5 border border-white/10',
     },
     padding: {
       none: '',

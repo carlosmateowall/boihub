@@ -2,29 +2,33 @@
 
 @theme {
   /* Brand */
-  --color-primary: #9fe870;
-  --color-primary-hover: #cdffad;
-  --color-primary-neutral: #c5edab;
-  --color-primary-pale: #e2f6d5;
+  --color-primary: #4ade80;
+  --color-primary-hover: #22c55e;
+  --color-primary-neutral: #166534;
+  --color-primary-pale: rgba(74,222,128,0.12);
 
   /* Surfaces */
-  --color-canvas: #ffffff;
-  --color-canvas-soft: #e8ebe6;
+  --color-canvas: #0d0d0d;
+  --color-canvas-soft: #050505;
 
   /* Text */
-  --color-ink: #0e0f0c;
-  --color-ink-deep: #163300;
-  --color-body: #454745;
-  --color-mute: #868685;
+  --color-ink: #ffffff;
+  --color-ink-deep: #f0f0f0;
+  --color-body: rgba(255,255,255,0.65);
+  --color-mute: rgba(255,255,255,0.35);
+
+  /* Borders (novos) */
+  --color-border: rgba(255,255,255,0.08);
+  --color-border-strong: rgba(255,255,255,0.18);
 
   /* Semantic */
-  --color-positive: #2ead4b;
-  --color-positive-deep: #054d28;
-  --color-warning: #ffd11a;
-  --color-warning-deep: #b86700;
-  --color-warning-content: #4a3b1c;
-  --color-negative: #d03238;
-  --color-negative-deep: #a72027;
+  --color-positive: #4ade80;
+  --color-positive-deep: #22c55e;
+  --color-warning: #facc15;
+  --color-warning-deep: #d97706;
+  --color-warning-content: #fef3c7;
+  --color-negative: #f87171;
+  --color-negative-deep: #ef4444;
 
   /* Illustrative accents */
   --color-accent-orange: #ffc091;
@@ -43,23 +47,25 @@
 }
 
 :root {
-  --primary: #9fe870;
-  --primary-hover: #cdffad;
-  --primary-neutral: #c5edab;
-  --primary-pale: #e2f6d5;
-  --canvas: #ffffff;
-  --canvas-soft: #e8ebe6;
-  --ink: #0e0f0c;
-  --ink-deep: #163300;
-  --body: #454745;
-  --mute: #868685;
-  --positive: #2ead4b;
-  --positive-deep: #054d28;
-  --warning: #ffd11a;
-  --warning-deep: #b86700;
-  --warning-content: #4a3b1c;
-  --negative: #d03238;
-  --negative-deep: #a72027;
+  --primary: #4ade80;
+  --primary-hover: #22c55e;
+  --primary-neutral: #166534;
+  --primary-pale: rgba(74,222,128,0.12);
+  --canvas: #0d0d0d;
+  --canvas-soft: #050505;
+  --ink: #ffffff;
+  --ink-deep: #f0f0f0;
+  --body: rgba(255,255,255,0.65);
+  --mute: rgba(255,255,255,0.35);
+  --border: rgba(255,255,255,0.08);
+  --border-strong: rgba(255,255,255,0.18);
+  --positive: #4ade80;
+  --positive-deep: #22c55e;
+  --warning: #facc15;
+  --warning-deep: #d97706;
+  --warning-content: #fef3c7;
+  --negative: #f87171;
+  --negative-deep: #ef4444;
   --accent-orange: #ffc091;
   --accent-cyan: #38c8ff;
 }
@@ -79,7 +85,7 @@ body {
   font-family: var(--font-body);
 }
 
-/* Typography utility classes */
+/* Typography utility classes — não alterar */
 .display-mega {
   font-family: var(--font-display);
   font-size: 96px;

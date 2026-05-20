@@ -33,7 +33,7 @@ export function PerfilSelector({ value, onChange }: PerfilSelectorProps) {
                 'flex items-center gap-4 p-4 rounded-xl border-2 text-left transition-all',
                 selected
                   ? 'border-primary bg-primary-pale'
-                  : 'border-canvas-soft bg-canvas-soft hover:border-ink/20'
+                  : 'border-border bg-canvas hover:border-border-strong'
               )}
             >
               <div className={cn('p-2 rounded-lg', selected ? 'bg-primary' : 'bg-canvas')}>

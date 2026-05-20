@@ -40,7 +40,7 @@ export function FreteCard({ frete }: Props) {
           </div>
 
           {frete.preco_total && (
-            <div className="flex items-center justify-between pt-1 border-t border-canvas-soft">
+            <div className="flex items-center justify-between pt-1 border-t border-border">
               <span className="text-sm text-mute">Valor total</span>
               <span className="font-semibold text-ink">{formatCurrency(frete.preco_total)}</span>
             </div>

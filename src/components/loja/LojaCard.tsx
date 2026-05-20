@@ -41,7 +41,7 @@ export function LojaCard({ loja }: Props) {
         {loja.categorias && loja.categorias.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
             {loja.categorias.map(c => (
-              <span key={c} className="text-xs bg-canvas-soft text-mute px-2 py-1 rounded-md">
+              <span key={c} className="text-xs bg-white/5 text-mute px-2 py-1 rounded-md">
                 {c}
               </span>
             ))}
@@ -52,7 +52,7 @@ export function LojaCard({ loja }: Props) {
           <p className="text-sm text-mute leading-relaxed line-clamp-2 flex-1">{loja.descricao}</p>
         )}
 
-        <div className="pt-2 border-t border-canvas-soft flex gap-2">
+        <div className="pt-2 border-t border-border flex gap-2">
           {whatsappUrl && (
             <Button variant="primary" size="sm" className="flex-1" asChild>
               <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">

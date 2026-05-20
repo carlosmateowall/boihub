@@ -73,13 +73,13 @@ export default async function FreteDetalhePage({ params }: { params: Promise<{ i
           </div>
 
           {frete.observacoes && (
-            <div className="pt-3 border-t border-canvas-soft">
+            <div className="pt-3 border-t border-border">
               <p className="text-sm text-mute">{frete.observacoes}</p>
             </div>
           )}
 
           {frete.preco_total && (
-            <div className="pt-3 border-t border-canvas-soft flex items-center justify-between">
+            <div className="pt-3 border-t border-border flex items-center justify-between">
               <span className="text-mute text-sm">Valor total</span>
               <span className="display-xs text-ink">{formatCurrency(frete.preco_total)}</span>
             </div>

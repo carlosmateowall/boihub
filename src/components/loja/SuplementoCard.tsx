@@ -21,7 +21,7 @@ export function SuplementoCard({ suplemento: s }: Props) {
           <p className="text-sm text-mute leading-relaxed line-clamp-2">{s.descricao}</p>
         )}
 
-        <div className="flex items-center justify-between pt-2 border-t border-canvas-soft">
+        <div className="flex items-center justify-between pt-2 border-t border-border">
           <div>
             {s.preco ? (
               <>
@@ -33,7 +33,7 @@ export function SuplementoCard({ suplemento: s }: Props) {
             )}
           </div>
           {s.peso_kg && (
-            <span className="text-xs bg-canvas-soft text-mute px-2 py-1 rounded-md">
+            <span className="text-xs bg-white/5 text-mute px-2 py-1 rounded-md">
               {s.peso_kg} kg
             </span>
           )}

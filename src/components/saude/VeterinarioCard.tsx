@@ -39,7 +39,7 @@ export function VeterinarioCard({ vet }: Props) {
           <p className="text-sm text-mute leading-relaxed line-clamp-2">{vet.bio}</p>
         )}
 
-        <div className="flex items-center justify-between pt-3 border-t border-canvas-soft">
+        <div className="flex items-center justify-between pt-3 border-t border-border">
           {vet.preco_consulta ? (
             <div>
               <p className="font-semibold text-ink">{formatCurrency(vet.preco_consulta)}</p>

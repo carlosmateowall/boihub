@@ -60,7 +60,7 @@ export function ProdutoCard({ produto }: Props) {
           <p className="text-sm text-mute leading-relaxed">{produto.descricao}</p>
         )}
 
-        <div className="flex items-center justify-between pt-2 border-t border-canvas-soft">
+        <div className="flex items-center justify-between pt-2 border-t border-border">
           <div>
             <p className="font-semibold text-ink">{formatCurrency(produto.preco)}</p>
             <p className="text-xs text-mute">por {produto.preco_unidade}</p>
@@ -85,7 +85,7 @@ export function ProdutoCard({ produto }: Props) {
                 value={peso}
                 onChange={e => setPeso(e.target.value)}
                 placeholder="Peso do animal (kg)"
-                className="flex-1 bg-canvas-soft text-ink rounded-md px-3 py-2 text-sm border border-canvas-soft focus:outline-none focus:ring-2 focus:ring-primary"
+                className="flex-1 bg-white/5 text-ink rounded-md px-3 py-2 text-sm border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 placeholder:text-mute"
               />
               <button
                 onClick={calcularDose}

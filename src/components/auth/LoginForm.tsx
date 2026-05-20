@@ -85,6 +85,13 @@ export function LoginForm() {
           <Button type="submit" variant="primary" size="md" className="w-full mt-2" disabled={loading}>
             {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Entrar'}
           </Button>
+
+          <Link
+            href="/esqueci-senha"
+            className="text-center text-sm text-mute hover:text-ink"
+          >
+            Esqueci minha senha
+          </Link>
         </form>
 
         <p className="text-center text-sm text-mute">

@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { Pencil } from 'lucide-react'
+import { Pencil, FileText, Shield, ChevronRight } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/shared/Badge'
@@ -83,6 +83,29 @@ export default async function PerfilPage() {
               <span className="font-semibold text-ink text-sm">{profile.whatsapp}</span>
             </div>
           )}
+        </CardContent>
+      </Card>
+
+      <Card variant="default">
+        <CardContent className="flex flex-col p-0">
+          <Link
+            href="/termos"
+            className="flex items-center justify-between px-5 py-4 border-b border-ink/10 hover:bg-canvas-soft transition-colors"
+          >
+            <span className="flex items-center gap-3 text-sm text-ink">
+              <FileText className="h-4 w-4 text-mute" /> Termos de Uso
+            </span>
+            <ChevronRight className="h-4 w-4 text-mute" />
+          </Link>
+          <Link
+            href="/privacidade"
+            className="flex items-center justify-between px-5 py-4 hover:bg-canvas-soft transition-colors"
+          >
+            <span className="flex items-center gap-3 text-sm text-ink">
+              <Shield className="h-4 w-4 text-mute" /> Política de Privacidade
+            </span>
+            <ChevronRight className="h-4 w-4 text-mute" />
+          </Link>
         </CardContent>
       </Card>
     </div>

@@ -25,6 +25,7 @@ export function CadastroForm() {
   const [email, setEmail] = useState('')
   const [senha, setSenha] = useState('')
   const [perfil, setPerfil] = useState<PerfilTipo | ''>('')
+  const [aceitouTermos, setAceitouTermos] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const [emailSent, setEmailSent] = useState(false)
@@ -43,6 +44,7 @@ export function CadastroForm() {
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
     if (!perfil) { setError('Selecione um perfil.'); return }
+    if (!aceitouTermos) { setError('Você precisa aceitar os Termos de Uso e a Política de Privacidade.'); return }
     setError('')
     setLoading(true)
     const { data, error: authError } = await supabase.auth.signUp({
@@ -120,8 +122,29 @@ export function CadastroForm() {
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <PerfilSelector value={perfil} onChange={setPerfil} />
+
+            <label className="flex items-start gap-3 text-sm text-mute cursor-pointer">
+              <input
+                type="checkbox"
+                checked={aceitouTermos}
+                onChange={e => setAceitouTermos(e.target.checked)}
+                className="mt-1 h-4 w-4 rounded border-ink/30 text-primary focus:ring-primary"
+              />
+              <span>
+                Li e aceito os{' '}
+                <Link href="/termos" target="_blank" className="font-semibold text-ink hover:text-primary underline">
+                  Termos de Uso
+                </Link>{' '}
+                e a{' '}
+                <Link href="/privacidade" target="_blank" className="font-semibold text-ink hover:text-primary underline">
+                  Política de Privacidade
+                </Link>
+                .
+              </span>
+            </label>
+
             {error && <p className="text-sm text-negative">{error}</p>}
-            <Button type="submit" variant="primary" size="md" className="w-full mt-2" disabled={loading || !perfil}>
+            <Button type="submit" variant="primary" size="md" className="w-full mt-2" disabled={loading || !perfil || !aceitouTermos}>
               {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : 'Criar conta'}
             </Button>
           </form>

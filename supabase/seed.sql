@@ -22,11 +22,12 @@ INSERT INTO veterinarios (nome, crmv, especialidades, cidade, estado, avaliacao,
   ('Dr. Fábio Magalhães',   'PR 14.091', ARRAY['Doenças Infecciosas','Vacinologia','Tuberculose'],'Londrina',  'PR', 4.8, 221, true,  100, 'Especialista em doenças infecciosas bovinas. Consultor de programas de vacinação e controle de tuberculose.',       '43991110009'),
   ('Dra. Patricia Nunes',   'RS 8.932',  ARRAY['Clínica Geral','Bem-estar Animal','Auditoria'], 'Porto Alegre','RS', 4.7, 165, false, 95,  'Médica veterinária especializada em bem-estar animal e auditoria rural. Certificação para exportação.',              '51991110010');
 
+
 -- ──────────────────────────────────────────────────────────
 -- MOTORISTAS (8 profissionais)
 -- ──────────────────────────────────────────────────────────
 TRUNCATE TABLE motoristas RESTART IDENTITY CASCADE;
-
+ 
 INSERT INTO motoristas (nome, caminhao, placa, capacidade, cidade, estado, avaliacao, total_viagens, online, raio_atuacao_km, preco_por_cabeca, whatsapp) VALUES
   ('João Batista',         'Scania R450',          'ABC1D23', 24, 'Planaltina',   'DF', 4.9, 312, true,  300, 28, '61992220001'),
   ('Carlos Mendonça',      'Volvo FH 460',          'DEF4G56', 18, 'Sobradinho',   'DF', 4.7, 187, true,  250, 25, '61992220002'),

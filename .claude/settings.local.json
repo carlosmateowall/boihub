@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx tsc *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(npm install *)",
+      "Bash(git push *)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Vault\\\\99-Anexos\\\\BoiHub\\\\boihub\" -Recurse -Directory)",
+      "Bash(Select-Object -ExpandProperty FullName)",
+      "Bash(Sort-Object)",
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell($env:PATH -split ';' | ForEach-Object { $_ })",
+      "PowerShell(Test-Path *)",
+      "Bash(npm --version)",
+      "PowerShell(winget *)",
+      "mcp__claude_ai_Supabase__list_tables",
+      "mcp__claude_ai_Supabase__apply_migration",
+      "mcp__claude_ai_Supabase__execute_sql",
+      "PowerShell(npm *)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; & \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" --version)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; Set-Location \"C:\\\\Vault\\\\99-Anexos\\\\BoiHub\\\\boihub-v2\"; & \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" install 2>&1)",
+      "PowerShell($env:PATH = \"C:\\\\Program Files\\\\nodejs;\" + $env:PATH; Set-Location \"C:\\\\Vault\\\\99-Anexos\\\\BoiHub\\\\boihub-v2\"; & \"C:\\\\Program Files\\\\nodejs\\\\npm.cmd\" run build 2>&1)",
+      "PowerShell(git config *)"
+    ]
+  }
+}

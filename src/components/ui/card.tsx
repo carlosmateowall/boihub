@@ -2,18 +2,19 @@ import * as React from 'react'
 import { cn } from '@/lib/utils'
 import { cva, type VariantProps } from 'class-variance-authority'
 
-const cardVariants = cva('rounded-xl', {
+const cardVariants = cva('rounded-lg', {
   variants: {
     variant: {
       default: 'bg-canvas border border-border',
-      sage:    'bg-canvas-soft border border-border',
-      dark:    'bg-white/5 border border-white/10',
+      sage:    'bg-canvas-warm border border-border',
+      dark:    'bg-verde-900 text-ink-on-dark border border-border-dark',
+      ouro:    'bg-ouro-soft border border-ouro/30 text-warning-content',
     },
     padding: {
       none: '',
       sm: 'p-4',
-      md: 'p-6',
-      lg: 'p-8',
+      md: 'p-5',
+      lg: 'p-6',
     },
   },
   defaultVariants: {
@@ -42,7 +43,7 @@ CardHeader.displayName = 'CardHeader'
 
 const CardTitle = React.forwardRef<HTMLHeadingElement, React.HTMLAttributes<HTMLHeadingElement>>(
   ({ className, ...props }, ref) => (
-    <h3 ref={ref} className={cn('font-semibold text-xl leading-tight', className)} {...props} />
+    <h3 ref={ref} className={cn('bh-display text-xl leading-tight', className)} {...props} />
   )
 )
 CardTitle.displayName = 'CardTitle'

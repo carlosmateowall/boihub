@@ -6,21 +6,24 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const buttonVariants = cva(
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50',
+  'inline-flex items-center justify-center gap-2 whitespace-nowrap font-semibold transition-colors disabled:pointer-events-none disabled:opacity-50 button-md',
   {
     variants: {
       variant: {
-        primary:   'bg-primary text-black rounded-xl hover:bg-primary-hover',
-        secondary: 'bg-canvas text-ink rounded-xl border border-border hover:bg-white/10',
-        tertiary:  'bg-transparent text-ink rounded-xl border border-border-strong hover:bg-white/10',
-        ghost:     'text-ink rounded-xl hover:bg-white/5',
-        glass:     'bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-xl hover:bg-white/20',
-        danger:    'bg-negative text-white rounded-xl hover:bg-negative-deep',
+        primary:   'bg-verde-900 text-creme rounded-md hover:bg-verde-700',
+        accent:    'bg-verde-400 text-verde-900 rounded-md hover:bg-verde-200',
+        gold:      'bg-ouro text-[#1a1206] rounded-md hover:bg-[#a47e22]',
+        secondary: 'bg-canvas text-ink border border-border-strong rounded-md hover:bg-canvas-warm',
+        outline:   'bg-transparent text-ink border border-border-strong rounded-md hover:bg-canvas-warm',
+        tertiary:  'bg-transparent text-ink rounded-md hover:bg-canvas-warm',
+        ghost:     'text-ink rounded-md hover:bg-canvas-warm',
+        glass:     'bg-canvas/40 backdrop-blur-sm border border-border text-ink rounded-md hover:bg-canvas/60',
+        danger:    'bg-negative text-white rounded-md hover:bg-negative-deep',
       },
       size: {
-        sm:   'px-4 py-2 text-sm',
-        md:   'px-6 py-3 text-base',
-        lg:   'px-8 py-4 text-lg',
+        sm:   'px-3 py-1.5 text-[13px] h-8',
+        md:   'px-4 py-2.5 text-[14px] h-10',
+        lg:   'px-5 py-3 text-[15px] h-12',
         icon: 'h-10 w-10',
       },
     },

@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import {
-  Beef, Sprout, Truck, Star, Stethoscope, Video, ArrowRight, MapPin, Sparkles,
+  Beef, Sprout, Truck, Star, Stethoscope, Video, ArrowRight, MapPin, Sparkles, Calculator,
 } from 'lucide-react'
 import { Greeting } from '@/components/shared/Greeting'
 import { StatCard } from '@/components/shared/StatCard'
@@ -78,13 +78,20 @@ export function DashboardProdutor({ profile, fretes, consultas }: Props) {
 
       <section>
         <SectionHead eyebrow="atalhos" title="Ações rápidas" />
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
           <ActionCard
             icon={Truck}
             title="Solicitar frete"
             sub="Combine valor com motoristas e pague via PIX"
             tone="dark"
             href="/fretes/novo"
+          />
+          <ActionCard
+            icon={Calculator}
+            title="Calculadora de dosagem"
+            sub="Dose certa de vacinas, vermífugos e antibióticos"
+            tone="gold"
+            href="/saude/calculadora"
           />
           <ActionCard
             icon={Stethoscope}

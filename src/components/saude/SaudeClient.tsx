@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import Link from 'next/link'
-import { Stethoscope, Syringe } from 'lucide-react'
+import { Stethoscope, Syringe, Calculator } from 'lucide-react'
 import { SearchBar } from '@/components/shared/SearchBar'
 import { ProdutoCard } from './ProdutoCard'
 import { EmptyState } from '@/components/shared/EmptyState'
@@ -30,13 +30,20 @@ export function SaudeClient({ produtos }: Props) {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
         <SearchBar value={query} onChange={setQuery} placeholder="Buscar produto..." className="flex-1" />
-        <Button variant="secondary" asChild>
-          <Link href="/saude/veterinarios">
-            <Stethoscope className="h-4 w-4" /> Veterinários
-          </Link>
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="primary" size="md" asChild className="flex-1 sm:flex-initial">
+            <Link href="/saude/calculadora">
+              <Calculator className="h-4 w-4" /> Calculadora
+            </Link>
+          </Button>
+          <Button variant="secondary" size="md" asChild className="flex-1 sm:flex-initial">
+            <Link href="/saude/veterinarios">
+              <Stethoscope className="h-4 w-4" /> Veterinários
+            </Link>
+          </Button>
+        </div>
       </div>
 
       <div className="flex gap-2 overflow-x-auto pb-1">

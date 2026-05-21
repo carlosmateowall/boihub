@@ -1,11 +1,17 @@
 import Link from 'next/link'
-import { Truck, HeartPulse, ShoppingBag, Plus, ArrowRight } from 'lucide-react'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
+import {
+  Beef, Sprout, Truck, Star, Stethoscope, Video, ArrowRight, MapPin, Sparkles,
+} from 'lucide-react'
+import { Greeting } from '@/components/shared/Greeting'
+import { StatCard } from '@/components/shared/StatCard'
+import { SectionHead } from '@/components/shared/SectionHead'
+import { ActionCard } from '@/components/shared/ActionCard'
+import { ListContainer, ListRow } from '@/components/shared/ListContainer'
 import { Badge } from '@/components/shared/Badge'
-import type { Profile, Frete, ConsultaVet } from '@/types/database'
+import { Button } from '@/components/ui/button'
 import { formatCurrency, formatDate } from '@/lib/utils'
 import { FRETE_STATUS_LABELS, GADO_TIPO_LABELS } from '@/lib/constants'
+import type { Profile, Frete, ConsultaVet } from '@/types/database'
 
 interface Props {
   profile: Profile
@@ -13,119 +19,207 @@ interface Props {
   consultas: ConsultaVet[]
 }
 
-const freteStatusVariant: Record<string, 'positive' | 'warning' | 'negative' | 'primary' | 'mute'> = {
+const freteStatusVariant: Record<
+  string,
+  'positive' | 'warning' | 'negative' | 'primary' | 'neutral' | 'info'
+> = {
   pendente: 'warning',
   confirmado: 'positive',
-  em_andamento: 'primary',
-  concluido: 'mute',
+  em_andamento: 'info',
+  concluido: 'neutral',
   cancelado: 'negative',
 }
 
 export function DashboardProdutor({ profile, fretes, consultas }: Props) {
-  const fretesAtivos = fretes.filter(f => ['pendente', 'confirmado', 'em_andamento'].includes(f.status))
+  const fretesAtivos = fretes.filter(f =>
+    ['pendente', 'confirmado', 'em_andamento'].includes(f.status),
+  )
+  const fmt = new Intl.NumberFormat('pt-BR')
+  const sub = [profile.fazenda ?? 'Sua fazenda', profile.cidade]
+    .filter(Boolean)
+    .join(' · ')
 
   return (
-    <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="display-sm text-ink">Olá, {profile.nome.split(' ')[0]}</h1>
-        <p className="body-md text-mute mt-1">{profile.fazenda ?? 'Sua fazenda'}{profile.cidade ? ` · ${profile.cidade}` : ''}</p>
+    <div className="flex flex-col gap-7">
+      <Greeting
+        nome={profile.nome.split(' ')[0]}
+        sub={sub}
+        eyebrow="Produtor rural"
+      />
+
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 lg:gap-4">
+        <StatCard
+          icon={Beef}
+          label="cabeças"
+          value={fmt.format(profile.cabecas ?? 0)}
+          sub="rebanho atual"
+          emphasis="hero"
+        />
+        <StatCard
+          icon={Sprout}
+          label="hectares"
+          value={fmt.format(profile.hectares ?? 0)}
+          sub={`${fmt.format(Math.round((profile.hectares ?? 0) * 0.4))} ha pasto`}
+        />
+        <StatCard
+          icon={Truck}
+          label="fretes"
+          value={fretesAtivos.length}
+          sub="ativos agora"
+        />
+        <StatCard
+          icon={Star}
+          label="avaliação"
+          value={(profile.avaliacao ?? 0).toFixed(1)}
+          suffix="/5"
+          sub={`de ${profile.fretes_count ?? 0} negócios`}
+        />
       </div>
 
-      {/* Stats */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {[
-          { label: 'Cabeças', value: (profile.cabecas ?? 0).toLocaleString('pt-BR'), icon: '🐄' },
-          { label: 'Hectares', value: (profile.hectares ?? 0).toLocaleString('pt-BR'), icon: '🌾' },
-          { label: 'Fretes ativos', value: fretesAtivos.length, icon: '🚛' },
-          { label: 'Avaliação', value: `${(profile.avaliacao ?? 0).toFixed(1)} ★`, icon: '⭐' },
-        ].map(stat => (
-          <Card key={stat.label} variant="default">
-            <CardContent>
-              <p className="text-2xl mb-1">{stat.icon}</p>
-              <p className="display-xs text-ink">{stat.value}</p>
-              <p className="caption text-mute mt-1">{stat.label}</p>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+      <section>
+        <SectionHead eyebrow="atalhos" title="Ações rápidas" />
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <ActionCard
+            icon={Truck}
+            title="Solicitar frete"
+            sub="Combine valor com motoristas e pague via PIX"
+            tone="dark"
+            href="/fretes/novo"
+          />
+          <ActionCard
+            icon={Stethoscope}
+            title="Saúde animal"
+            sub="Catálogo de vacinas, vermífugos e mineral"
+            tone="light"
+            href="/saude"
+          />
+          <ActionCard
+            icon={Video}
+            title="Encontrar veterinário"
+            sub="Teleconsulta ou visita presencial"
+            tone="light"
+            href="/saude/veterinarios"
+          />
+        </div>
+      </section>
 
-      {/* Ações rápidas */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card variant="dark">
-          <CardContent className="flex flex-col gap-4">
-            <Truck className="h-8 w-8" strokeWidth={1.5} />
-            <div>
-              <p className="font-semibold text-lg">Solicitar frete</p>
-              <p className="text-sm opacity-70 mt-1">Encontre motoristas disponíveis</p>
+      <div className="grid grid-cols-1 lg:grid-cols-[1.4fr_1fr] gap-6">
+        <section>
+          <SectionHead
+            title="Seus fretes"
+            count={`${fretesAtivos.length} ativos`}
+            action={fretes.length > 0 ? 'Ver todos' : undefined}
+            actionHref="/fretes"
+          />
+          {fretes.length === 0 ? (
+            <div className="rounded-lg border border-border bg-canvas p-6 text-center">
+              <Truck className="h-7 w-7 mx-auto text-mute mb-3" strokeWidth={1.5} />
+              <p className="font-semibold text-ink text-[14px]">Sem fretes ainda</p>
+              <p className="text-[13px] text-mute mt-1 mb-4 max-w-xs mx-auto">
+                Solicite seu primeiro frete e combine valor diretamente com o motorista.
+              </p>
+              <Button variant="primary" size="sm" asChild>
+                <Link href="/fretes/novo">Solicitar frete</Link>
+              </Button>
             </div>
-            <Button variant="primary" size="sm" asChild>
-              <Link href="/fretes/novo"><Plus className="h-4 w-4" /> Novo frete</Link>
-            </Button>
-          </CardContent>
-        </Card>
-
-        <Card variant="sage">
-          <CardContent className="flex flex-col gap-4">
-            <HeartPulse className="h-8 w-8 text-ink" strokeWidth={1.5} />
-            <div>
-              <p className="font-semibold text-lg text-ink">Saúde animal</p>
-              <p className="text-sm text-mute mt-1">Vacinas, antiparasitários e mais</p>
-            </div>
-            <Button variant="tertiary" size="sm" asChild>
-              <Link href="/saude">Ver produtos</Link>
-            </Button>
-          </CardContent>
-        </Card>
-
-        <Card variant="sage">
-          <CardContent className="flex flex-col gap-4">
-            <ShoppingBag className="h-8 w-8 text-ink" strokeWidth={1.5} />
-            <div>
-              <p className="font-semibold text-lg text-ink">Loja</p>
-              <p className="text-sm text-mute mt-1">Revendas e fabricantes perto de você</p>
-            </div>
-            <Button variant="tertiary" size="sm" asChild>
-              <Link href="/loja">Explorar</Link>
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Últimos fretes */}
-      {fretes.length > 0 && (
-        <div className="flex flex-col gap-3">
-          <div className="flex items-center justify-between">
-            <h2 className="display-xs text-ink">Seus fretes</h2>
-            <Button variant="ghost" size="sm" asChild>
-              <Link href="/fretes" className="flex items-center gap-1">
-                Ver todos <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-          <div className="flex flex-col gap-2">
-            {fretes.map(f => (
-              <Card key={f.id} variant="default">
-                <CardContent className="flex items-center justify-between gap-4">
+          ) : (
+            <ListContainer>
+              {fretes.slice(0, 5).map(f => (
+                <ListRow key={f.id}>
+                  <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-canvas-warm border border-border text-mute shrink-0">
+                    <MapPin className="h-4 w-4" strokeWidth={1.5} />
+                  </span>
                   <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-ink truncate">{f.origem} → {f.destino}</p>
-                    <p className="text-sm text-mute mt-0.5">
-                      {f.cabecas} {GADO_TIPO_LABELS[f.tipo_gado]} · {formatDate(f.data_embarque)}
+                    <p className="text-[13.5px] font-semibold text-ink truncate">
+                      {f.origem} → {f.destino}
+                    </p>
+                    <p className="text-[12px] text-mute mt-0.5">
+                      {f.cabecas} {GADO_TIPO_LABELS[f.tipo_gado]} ·{' '}
+                      {formatDate(f.data_embarque)}
                     </p>
                   </div>
                   <div className="flex items-center gap-3 shrink-0">
-                    {f.preco_total && (
-                      <p className="font-semibold text-ink">{formatCurrency(f.preco_total)}</p>
+                    {f.preco_total != null && (
+                      <span className="bh-num text-[15px] text-ink">
+                        {formatCurrency(f.preco_total)}
+                      </span>
                     )}
-                    <Badge variant={freteStatusVariant[f.status] ?? 'mute'}>
+                    <Badge variant={freteStatusVariant[f.status] ?? 'neutral'} size="sm">
                       {FRETE_STATUS_LABELS[f.status]}
                     </Badge>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                </ListRow>
+              ))}
+            </ListContainer>
+          )}
+        </section>
+
+        <section className="flex flex-col gap-4">
+          <div>
+            <SectionHead
+              title="Próximas consultas"
+              count={consultas.length}
+              action={consultas.length > 0 ? 'Agenda' : undefined}
+              actionHref="/saude/consultas"
+            />
+            {consultas.length === 0 ? (
+              <div className="rounded-lg border border-border bg-canvas p-5 text-center">
+                <Stethoscope className="h-6 w-6 mx-auto text-mute mb-2" strokeWidth={1.5} />
+                <p className="text-[13px] text-mute mb-3">Nenhuma consulta agendada.</p>
+                <Button variant="secondary" size="sm" asChild>
+                  <Link href="/saude/veterinarios">Buscar veterinário</Link>
+                </Button>
+              </div>
+            ) : (
+              <ListContainer>
+                {consultas.slice(0, 3).map(c => (
+                  <ListRow key={c.id}>
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-md bg-canvas-warm border border-border text-mute shrink-0">
+                      <Stethoscope className="h-4 w-4" strokeWidth={1.5} />
+                    </span>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[13.5px] font-semibold text-ink truncate">
+                        {c.veterinarios?.nome ?? 'Veterinário'}
+                      </p>
+                      <p className="text-[12px] text-mute mt-0.5 truncate">
+                        {c.data_consulta
+                          ? new Date(c.data_consulta).toLocaleString('pt-BR', {
+                              day: '2-digit',
+                              month: 'short',
+                              hour: '2-digit',
+                              minute: '2-digit',
+                            })
+                          : 'a definir'}
+                      </p>
+                    </div>
+                    <Badge variant={c.tipo === 'online' ? 'info' : 'neutral'} size="sm">
+                      {c.tipo}
+                    </Badge>
+                  </ListRow>
+                ))}
+              </ListContainer>
+            )}
           </div>
-        </div>
-      )}
+
+          <Link
+            href="/fretes/novo"
+            className="hidden lg:flex items-center gap-3.5 rounded-lg bg-ouro-soft border border-ouro/30 px-5 py-4 hover:border-ouro/50 transition-colors"
+          >
+            <span className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-ouro/20 text-warning-deep shrink-0">
+              <Sparkles className="h-5 w-5" strokeWidth={1.5} />
+            </span>
+            <div className="flex-1 min-w-0">
+              <p className="text-[13.5px] font-semibold text-warning-content">BoiHub Premium</p>
+              <p className="text-[12.5px] text-warning-deep mt-0.5">
+                0% de comissão em fretes acima de R$ 5 mil.
+              </p>
+            </div>
+            <ArrowRight className="h-4 w-4 text-warning-deep" strokeWidth={2} />
+          </Link>
+        </section>
+      </div>
     </div>
   )
 }
+
+export type { Props as DashboardProdutorProps }

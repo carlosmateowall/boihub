@@ -1,73 +1,117 @@
 @import "tailwindcss";
 
 @theme {
-  /* Brand */
-  --color-primary: #4ade80;
-  --color-primary-hover: #22c55e;
-  --color-primary-neutral: #166534;
-  --color-primary-pale: rgba(74,222,128,0.12);
+  /* ─── Brand (verde agro) ─────────────────────────────────────── */
+  --color-verde-900: #0d2818;
+  --color-verde-700: #1a4f2e;
+  --color-verde-500: #2f7a4a;
+  --color-verde-400: #4ade80;
+  --color-verde-200: #c7e9d2;
 
-  /* Surfaces */
-  --color-canvas: #0d0d0d;
-  --color-canvas-soft: #050505;
+  --color-ouro: #c8992a;
+  --color-ouro-soft: #f3e4b8;
 
-  /* Text */
-  --color-ink: #ffffff;
-  --color-ink-deep: #f0f0f0;
-  --color-body: rgba(255,255,255,0.65);
-  --color-mute: rgba(255,255,255,0.35);
+  /* alias para Tailwind utility (bg-primary etc.) */
+  --color-primary: #0d2818;
+  --color-primary-hover: #1a4f2e;
+  --color-primary-neutral: #2f7a4a;
+  --color-primary-pale: #c7e9d2;
 
-  /* Borders (novos) */
-  --color-border: rgba(255,255,255,0.08);
-  --color-border-strong: rgba(255,255,255,0.18);
+  /* ─── Surfaces ───────────────────────────────────────────────── */
+  --color-creme: #f7f0e0;
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #f2ede0;
+  --color-canvas-warm: #faf5e7;
 
-  /* Semantic */
-  --color-positive: #4ade80;
-  --color-positive-deep: #22c55e;
-  --color-warning: #facc15;
-  --color-warning-deep: #d97706;
-  --color-warning-content: #fef3c7;
-  --color-negative: #f87171;
-  --color-negative-deep: #ef4444;
+  /* ─── Text ───────────────────────────────────────────────────── */
+  --color-ink: #1a2a1e;
+  --color-ink-deep: #0d2818;
+  --color-ink-soft: #41534a;
+  --color-body: #41534a;
+  --color-mute: #8a9a84;
+  --color-ink-on-dark: #f7f0e0;
+  --color-ink-on-dark-mute: #8aa498;
 
-  /* Illustrative accents */
+  /* ─── Borders ────────────────────────────────────────────────── */
+  --color-border: #e6dec9;
+  --color-border-strong: #c9be9f;
+  --color-border-dark: #1f3a26;
+
+  /* ─── Semantic ──────────────────────────────────────────────── */
+  --color-positive: #2ead4b;
+  --color-positive-deep: #054d28;
+  --color-positive-soft: #c7e9d2;
+
+  --color-warning: #c8992a;
+  --color-warning-deep: #7a5c0d;
+  --color-warning-content: #5a4408;
+  --color-warning-soft: #f3e4b8;
+
+  --color-negative: #c54a3d;
+  --color-negative-deep: #8a2c22;
+  --color-negative-soft: #f4d9d3;
+
+  --color-info: #3a7abf;
+  --color-info-soft: #d9e4f1;
+
+  /* ─── Accents (legado) ───────────────────────────────────────── */
   --color-accent-orange: #ffc091;
   --color-accent-cyan: #38c8ff;
 
-  /* Border radius */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  /* ─── Border radius ──────────────────────────────────────────── */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
   --radius-pill: 9999px;
 
-  /* Fonts */
-  --font-display: 'Manrope', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  /* ─── Shadows ────────────────────────────────────────────────── */
+  --shadow-xs: 0 1px 0 rgba(26, 42, 30, 0.04);
+  --shadow-sm: 0 1px 2px rgba(26, 42, 30, 0.05), 0 1px 1px rgba(26, 42, 30, 0.03);
+  --shadow-md: 0 6px 16px -8px rgba(26, 42, 30, 0.18), 0 2px 4px rgba(26, 42, 30, 0.04);
+  --shadow-lg: 0 18px 36px -18px rgba(13, 40, 24, 0.32), 0 4px 8px rgba(26, 42, 30, 0.04);
+
+  /* ─── Fonts ──────────────────────────────────────────────────── */
+  --font-display: 'Fraunces', 'Manrope', ui-serif, Georgia, serif;
+  --font-body: 'DM Sans', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 }
 
 :root {
-  --primary: #4ade80;
-  --primary-hover: #22c55e;
-  --primary-neutral: #166534;
-  --primary-pale: rgba(74,222,128,0.12);
-  --canvas: #0d0d0d;
-  --canvas-soft: #050505;
-  --ink: #ffffff;
-  --ink-deep: #f0f0f0;
-  --body: rgba(255,255,255,0.65);
-  --mute: rgba(255,255,255,0.35);
-  --border: rgba(255,255,255,0.08);
-  --border-strong: rgba(255,255,255,0.18);
-  --positive: #4ade80;
-  --positive-deep: #22c55e;
-  --warning: #facc15;
-  --warning-deep: #d97706;
-  --warning-content: #fef3c7;
-  --negative: #f87171;
-  --negative-deep: #ef4444;
-  --accent-orange: #ffc091;
-  --accent-cyan: #38c8ff;
+  --verde-900: #0d2818;
+  --verde-700: #1a4f2e;
+  --verde-500: #2f7a4a;
+  --verde-400: #4ade80;
+  --verde-200: #c7e9d2;
+  --ouro: #c8992a;
+  --ouro-soft: #f3e4b8;
+  --creme: #f7f0e0;
+  --canvas: #ffffff;
+  --canvas-soft: #f2ede0;
+  --canvas-warm: #faf5e7;
+  --ink: #1a2a1e;
+  --ink-deep: #0d2818;
+  --ink-soft: #41534a;
+  --body: #41534a;
+  --mute: #8a9a84;
+  --ink-on-dark: #f7f0e0;
+  --ink-on-dark-mute: #8aa498;
+  --border: #e6dec9;
+  --border-strong: #c9be9f;
+  --border-dark: #1f3a26;
+  --positive: #2ead4b;
+  --positive-deep: #054d28;
+  --positive-soft: #c7e9d2;
+  --warning: #c8992a;
+  --warning-deep: #7a5c0d;
+  --warning-soft: #f3e4b8;
+  --negative: #c54a3d;
+  --negative-deep: #8a2c22;
+  --negative-soft: #f4d9d3;
+  --info: #3a7abf;
+  --info-soft: #d9e4f1;
 }
 
 * {
@@ -77,103 +121,142 @@
 html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 body {
   background-color: var(--canvas-soft);
   color: var(--ink);
   font-family: var(--font-body);
+  font-feature-settings: "ss01", "cv11";
 }
 
-/* Typography utility classes — não alterar */
+/* ─── Typography — Cloud Design system (Fraunces + DM Sans) ───── */
+
+/* Fraunces opsz/SOFT — editorial, slightly soft serifs */
+.bh-display {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144, "SOFT" 50, "wght" 500;
+  font-feature-settings: "ss01", "ss02";
+  letter-spacing: -0.012em;
+  font-weight: 500;
+}
+
+/* Numeric font for stats — tabular, Fraunces with SOFT high */
+.bh-num {
+  font-family: var(--font-display);
+  font-variation-settings: "opsz" 144, "SOFT" 100, "wght" 500;
+  font-feature-settings: "tnum", "lnum", "ss01";
+  letter-spacing: -0.025em;
+  font-weight: 500;
+}
+
+/* Eyebrow / caps label */
+.bh-eyebrow {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+/* Hide scrollbars in mobile preview */
+.bh-scroll::-webkit-scrollbar { width: 0; height: 0; }
+.bh-scroll { scrollbar-width: none; }
+
+/* ─── Legacy typography classes — kept for compatibility ──────── */
 .display-mega {
   font-family: var(--font-display);
   font-size: 96px;
-  font-weight: 900;
+  font-weight: 500;
   line-height: 0.85;
+  letter-spacing: -0.012em;
 }
 
 .display-xl {
   font-family: var(--font-display);
   font-size: 64px;
-  font-weight: 900;
+  font-weight: 500;
   line-height: 0.9;
+  letter-spacing: -0.012em;
 }
 
 .display-md {
   font-family: var(--font-display);
   font-size: 40px;
-  font-weight: 900;
-  line-height: 0.9;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -0.012em;
 }
 
 .display-sm {
-  font-family: var(--font-body);
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 1.2;
+  font-family: var(--font-display);
+  font-size: 30px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
 }
 
 .display-xs {
-  font-family: var(--font-body);
-  font-size: 24px;
-  font-weight: 600;
-  line-height: 1.3;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.012em;
 }
 
 .body-lg {
   font-family: var(--font-body);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 1.5;
 }
 
 .body-md {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 400;
   line-height: 1.5;
 }
 
 .body-sm {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 400;
-  line-height: 1.43;
-}
-
-.caption {
-  font-family: var(--font-body);
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 1.33;
-}
-
-.display-lg {
-  font-family: var(--font-body);
-  font-size: 47px;
-  font-weight: 400;
-  line-height: 1.5;
-  letter-spacing: -0.108px;
+  line-height: 1.45;
 }
 
 .body-md-strong {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 1.5;
 }
 
 .body-sm-strong {
   font-family: var(--font-body);
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
-  line-height: 1.43;
+  line-height: 1.45;
+}
+
+.caption {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.35;
 }
 
 .button-md {
   font-family: var(--font-body);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
   line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid var(--verde-400);
+  outline-offset: 2px;
 }

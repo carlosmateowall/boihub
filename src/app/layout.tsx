@@ -1,19 +1,23 @@
 import type { Metadata, Viewport } from 'next'
-import { Manrope, Inter } from 'next/font/google'
+import { Fraunces, DM_Sans } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import './globals.css'
 
-const manrope = Manrope({
+// Fraunces — serif editorial, "agro com personalidade".
+// axes opsz + SOFT são usados pelas classes .bh-display e .bh-num via
+// font-variation-settings (em globals.css).
+const fraunces = Fraunces({
   subsets: ['latin'],
-  weight: ['400', '600', '700', '800'],
+  // weight omitido = variable, necessário pra usar axes SOFT/opsz
+  axes: ['SOFT'],
   variable: '--font-display',
   display: 'swap',
 })
 
-const inter = Inter({
+const dmSans = DM_Sans({
   subsets: ['latin'],
-  weight: ['400', '500', '600'],
+  weight: ['400', '500', '600', '700'],
   variable: '--font-body',
   display: 'swap',
 })
@@ -82,7 +86,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${manrope.variable} ${inter.variable}`}>
+    <html lang="pt-BR" className={`${fraunces.variable} ${dmSans.variable}`}>
       <body className="bg-canvas-soft text-ink font-body antialiased">
         {children}
         <Analytics />
